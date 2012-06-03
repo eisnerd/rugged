@@ -247,6 +247,34 @@ static VALUE rb_git_commit_parent_ids_GET(VALUE self)
 
 /*
  *	call-seq:
+ *		commit.note -> note
+ *
+ *	Return the note from the default notes reference for 
+ *      this +commit+, or nil if there is none. The note is
+ *	returned as a +Rugged::Note+ object.
+ *
+ *		commit.note #=> #<Rugged::Note:0x10882c680>
+ */
+static VALUE rb_git_commit_note_GET(VALUE self)
+{
+	git_commit *commit;
+	git_object *object;
+	git_note *note = NULL;
+	VALUE owner;
+	int error;
+
+	Data_Get_Struct(self, git_commit, commit);
+	owner = rugged_owner(self);
+
+	object = (git_object *)commit;
+	error = git_note_read(&note, git_object_owner(object), NULL, git_object_id(object));
+	rugged_exception_check(error);
+
+	return rugged_note_new(owner, note);
+}
+
+/*
+ *	call-seq:
  *		Commit.create(repository, data = {}) -> oid
  *
  *	Write a new +Commit+ object to +repository+, with the given +data+
@@ -400,5 +428,7 @@ void Init_rugged_commit()
 	rb_define_method(rb_cRuggedCommit, "parents", rb_git_commit_parents_GET, 0);
 	rb_define_method(rb_cRuggedCommit, "parent_ids", rb_git_commit_parent_ids_GET, 0);
 	rb_define_method(rb_cRuggedCommit, "parent_oids", rb_git_commit_parent_ids_GET, 0);
+
+	rb_define_method(rb_cRuggedCommit, "note", rb_git_commit_note_GET, 0);
 }
 
