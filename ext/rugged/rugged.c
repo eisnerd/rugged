@@ -236,6 +236,7 @@ void Init_rugged()
 	Init_rugged_object();
 	Init_rugged_commit();
 	Init_rugged_tree();
+	Init_rugged_note();
 	Init_rugged_tag();
 	Init_rugged_blob();
 

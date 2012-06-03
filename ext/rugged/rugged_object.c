@@ -27,6 +27,7 @@
 extern VALUE rb_mRugged;
 extern VALUE rb_cRuggedTag;
 extern VALUE rb_cRuggedTree;
+extern VALUE rb_cRuggedNote;
 extern VALUE rb_cRuggedCommit;
 extern VALUE rb_cRuggedBlob;
 extern VALUE rb_cRuggedRepo;

@@ -48,6 +48,7 @@
 void Init_rugged_object();
 void Init_rugged_commit();
 void Init_rugged_tree();
+void Init_rugged_note();
 void Init_rugged_tag();
 void Init_rugged_blob();
 void Init_rugged_index();
@@ -66,6 +67,7 @@ VALUE rugged_signature_new(const git_signature *sig, const char *encoding_name);
 VALUE rugged_index_new(VALUE klass, VALUE owner, git_index *index);
 VALUE rugged_object_new(VALUE owner, git_object *object);
 VALUE rugged_config_new(VALUE klass, VALUE owner, git_config *cfg);
+VALUE rugged_note_new(VALUE owner, git_note *object);
 
 VALUE rugged_otype_new(git_otype t);
 git_otype rugged_otype_get(VALUE rb_type);
